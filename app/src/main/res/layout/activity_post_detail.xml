@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f9fafc">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar1"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:background="#0088FF">
+            <ImageButton
+                android:id="@+id/backbtn"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ic_action_name"/>
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="게시글보기"
+                android:fontFamily="@font/nanumsquareneoalt"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="제목"
+            android:fontFamily="@font/nanumsquareneoalt"
+            android:layout_marginLeft="15dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/detail_date"
+                android:fontFamily="@font/nanumsquareneoalt"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:text="2025-05-29"
+                android:textSize="12sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:id="@+id/detail_views"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="4dp"
+                android:text="조회수: 0"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/detail_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="내용이 여기에 표시됩니다."
+            android:fontFamily="@font/nanumsquareneoalt"
+            android:textSize="18sp"
+            android:layout_margin="15dp" />
+
+        <EditText
+            android:id="@+id/edit_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="댓글을 입력하세요"
+            android:fontFamily="@font/nanumsquareneoalt"
+            android:layout_margin="15dp"
+            android:background="@drawable/border"
+            android:padding="12dp" />
+
+        <Button
+            android:id="@+id/btn_submit_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="댓글 등록"
+            android:fontFamily="@font/nanumsquareneoalt"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            app:cornerRadius="100dp"
+            android:backgroundTint="#E7E7E7"
+            android:textColor="#0088FF"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="댓글 목록"
+            android:fontFamily="@font/nanumsquareneoalt"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="4dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_comments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:padding="15sp"/>
+    </LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f9fafc"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar1"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:background="#0088FF"
+            app:titleTextColor="@color/white">
+            <ImageButton
+                android:id="@+id/backbtn"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ic_action_name"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="강의 보기"
+                android:fontFamily="@font/nanumsquareneoalt"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <!-- Video Player -->
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_margin="0dp"
+            android:adjustViewBounds="true"
+            android:layout_gravity="center" />
+
+
+        <!-- 강의 제목 -->
+        <TextView
+            android:id="@+id/lectureTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="제 1강 - 수동태는 관점의 차이다"
+            android:fontFamily="@font/nanumsquareneoalt"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <!-- 평점 + 별 아이콘 -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/textRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="강의 평점 4.7"
+                android:fontFamily="@font/nanumsquareneoalt"
+                android:textSize="16sp"
+                android:layout_marginRight="8dp" />
+
+            <TextView
+                android:id="@+id/textReviewCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(0)"
+                android:textSize="14sp"
+                android:layout_marginStart="4dp" />
+
+
+
+            <!-- 별점 -->
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:outlineSpotShadowColor="@color/blue"
+                android:isIndicator="false"
+                android:backgroundTint="@color/navy"
+                android:rating="4.7" />
+            <Button
+                android:id="@+id/buttonRate"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:text="평점 주기"
+                android:textColor="#0088FF"
+                android:fontFamily="@font/nanumsquareneoalt"
+                android:gravity="center"
+                android:textSize="8dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:backgroundTint="#E7E7E7"/>
+        </LinearLayout>
+
+
+        <!-- 댓글 입력 -->
+        <EditText
+            android:id="@+id/editComment"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/border"
+            android:hint="댓글"
+            android:fontFamily="@font/nanumsquareneoalt"
+            android:padding="12dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textSize="15dp" />
+
+        <!-- 쪽메모 입력 -->
+        <EditText
+            android:id="@+id/editNote"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:hint="메모"
+            android:fontFamily="@font/nanumsquareneoalt"
+            android:textSize="15dp"
+            android:background="@drawable/border"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="12dp"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/buttonNextLecture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="다음 강의로 이동"
+            android:fontFamily="@font/nanumsquareneoalt"
+            android:backgroundTint="#E7E7E7"
+            android:textColor="#0088FF"
+            android:textSize="16sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/goLectureList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="목록으로"
+            android:fontFamily="@font/nanumsquareneoalt"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:backgroundTint="#E7E7E7"
+            android:textColor="#0088FF"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="24dp"/>
+    </LinearLayout>
+</ScrollView>

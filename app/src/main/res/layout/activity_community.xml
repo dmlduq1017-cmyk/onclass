@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 콘텐츠 영역 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#f9fafc">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar1"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:background="#0088FF"
+            app:titleTextColor="@color/white">
+            <ImageButton
+                android:id="@+id/backbtn"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ic_action_name"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="커뮤니티 [Community]"
+                android:fontFamily="@font/nanumsquareneoalt"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="20sp"  />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <!-- 탭 -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:tabIndicatorColor="@color/navy"
+            app:tabSelectedTextColor="@color/navy"
+            app:tabTextColor="@color/black" />
+
+        <!-- 페이지 -->
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#f9fafc"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- 하단 네비게이션 뷰 -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:labelVisibilityMode="labeled"
+            android:background="@android:color/white"
+            app:itemIconTint="#0088FF"
+            app:itemTextColor="@color/black"
+            app:itemActiveIndicatorStyle="@style/Theme.OneThree.Indicator"
+            app:menu="@menu/bottom_nav_menu"/>
+
+        <!-- 플로팅 홈 버튼 -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_home"
+            android:src="@drawable/homeic"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:backgroundTint="#f4f4f4"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="25dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.FloatingActionButton"
+            app:fabCustomSize="70dp"
+            app:maxImageSize="40dp"
+            app:tint="@null"/>
+
+        <!-- 글쓰기 버튼 -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_write"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="13dp"
+            android:layout_marginBottom="13dp"
+            android:layout_above="@id/bottom_navigation"
+            android:backgroundTint="#0088FF"
+            android:contentDescription="글쓰기"
+            android:src="@drawable/write"
+            app:maxImageSize="30dp"
+            app:tint="@android:color/white" />
+    </RelativeLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+

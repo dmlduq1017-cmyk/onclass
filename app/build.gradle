@@ -1,0 +1,61 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
+
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:33.5.1')
+    implementation 'com.google.firebase:firebase-firestore'
+}
+
+android {
+    namespace 'com.example.project'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.example.project"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.activity
+    implementation libs.constraintlayout
+    implementation libs.firebase.auth
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+
+    // Firebase BoM: 여러 Firebase 버전을 통일
+    implementation platform('com.google.firebase:firebase-bom:33.5.1')
+
+    // Firestore
+    implementation 'com.google.firebase:firebase-firestore'
+
+    // (선택) Analytics 사용 시
+    // implementation 'com.google.firebase:firebase-analytics'
+}
+
+apply plugin: 'com.google.gms.google-services'

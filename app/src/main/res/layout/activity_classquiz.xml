@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f9fafc">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#0088FF"
+        app:titleTextColor="@color/white">
+        <ImageButton
+            android:id="@+id/backbtn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/ic_action_name"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="퀴즈 풀기"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="23sp" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- 문제 1-2번 O/X퀴즈 -->
+
+            <TextView
+                android:id="@+id/question1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Q1. The word “disinterested” means the same as “uninterested.”"
+                android:textSize="17sp"
+                android:textStyle="bold"/>
+            <RadioGroup
+                android:id="@+id/radioGroup1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/radio1_O"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="O"/>
+                <RadioButton
+                    android:id="@+id/radio1_X"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="X"/>
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/question2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Q2. “Neither of the students were present at the meeting.” is grammatically correct."
+                android:textSize="17sp"
+                android:textStyle="bold"/>
+            <RadioGroup
+                android:id="@+id/radioGroup2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/radio2_O"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="O"/>
+                <RadioButton
+                    android:id="@+id/radio2_X"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="X"/>
+            </RadioGroup>
+
+            <!-- 문제 3-7번 5지선다 -->
+            <TextView
+                android:id="@+id/question3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold"
+                android:text="Q3. Choose the word that best fits the blank:
+His ___ attitude towards the project surprised everyone."
+                android:textSize="17sp"/>
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox3_1"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginTop="10dp"
+                app:buttonTint="@color/navy"
+                android:text="A) enthusiastic"/>
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox3_2"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="B) indifferent"/>
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox3_3"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="C) attentive"/>
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox3_4"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="D) cooperative"/>
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox3_5"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="E) diligent"/>
+
+            <TextView
+                android:id="@+id/question4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold"
+                android:text="Q4. Which sentence is grammatically correct?"
+                android:textSize="17sp"/>
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox4_1"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginTop="10dp"
+                app:buttonTint="@color/navy"
+                android:text="A) Each of the players have a unique style." />
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox4_2"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="B) Neither of them are ready to leave." />
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox4_3"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="C) The committee have reached a decision."/>
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox4_4"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="D) Neither of them is ready to leave."/>
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox4_5"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="E) None of the books is interesting."/>
+
+            <TextView
+                android:id="@+id/question5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold"
+                android:text="Q5. What do the words in parentheses in the following sentence mean? - She was (oblivious) to the noise around her."
+                android:textSize="17sp"/>
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox5_1"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginTop="10dp"
+                app:buttonTint="@color/navy"
+                android:text="A) aware" />
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox5_2"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="B) sensitive" />
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox5_3"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="C) unaware"/>
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox5_4"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="D) critical"/>
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox5_5"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="E) receptive"/>
+
+            <TextView
+                android:id="@+id/question6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold"
+                android:text="Q6. Choose the correct meaning of the phrase “take after.”"
+                android:textSize="17sp"/>
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox6_1"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginTop="10dp"
+                app:buttonTint="@color/navy"
+                android:text="A) To chase" />
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox6_2"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="B) To resemble" />
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox6_3"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="C) To criticize"/>
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox6_4"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="D) To manage"/>
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox6_5"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="E) To protect"/>
+
+            <TextView
+                android:id="@+id/question7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold"
+                android:text="Q7. Choose the word closest in meaning to “alleviate.”"
+                android:textSize="17sp"/>
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox7_1"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginTop="10dp"
+                app:buttonTint="@color/navy"
+                android:text="A) worsen" />
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox7_2"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="B) reduce" />
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox7_3"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="C) analyze"/>
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox7_4"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="D) avoid"/>
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBox7_5"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                app:buttonTint="@color/navy"
+                android:text="E) exaggerate"/>
+
+            <!-- 문제 8-10번 단답형 -->
+            <TextView
+                android:id="@+id/question8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Q8. Fill in the blank - He decided to take a year off and go on a(n) ___________ abroad."
+                android:textSize="17sp"
+                android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/editText8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="정답 입력"/>
+
+            <TextView
+                android:id="@+id/question9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Q9. Write the past tense of “forbid.”"
+                android:textSize="17sp"
+                android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/editText9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="정답 입력"/>
+
+            <TextView
+                android:id="@+id/question10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Q10. What is the synonym of “mandatory”?"
+                android:textSize="17sp"
+                android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/editText10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="정답 입력"/>
+
+            <!-- 제출 버튼 -->
+            <Button
+                android:id="@+id/submitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="정답 제출"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="100dp"
+                android:backgroundTint="@color/navy"/>
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

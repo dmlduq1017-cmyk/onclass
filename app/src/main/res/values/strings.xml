@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Project</string>
+    <string-array name="post_categories">
+        <item>자유</item>
+        <item>스터디</item>
+        <item>꿀팁</item>
+    </string-array>
+</resources>

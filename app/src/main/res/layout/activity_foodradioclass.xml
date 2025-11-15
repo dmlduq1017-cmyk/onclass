@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f9fafc">
+
+    <!-- 상단 툴바 -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#0088FF"
+        app:titleTextColor="@color/white">
+        <ImageButton
+            android:id="@+id/backbtn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/ic_action_name"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="강의 정보"
+            android:fontFamily="@font/nanumsquareneoalt"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- 스크롤 영역 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 프로필 이미지 -->
+            <ImageView
+                android:id="@+id/imageProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/foodradio" />
+
+            <!-- 강의 정보 카드뷰 -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardLecture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- 제목 -->
+                    <TextView
+                        android:id="@+id/textTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="레읽녀의 요리 대백과"
+                        android:fontFamily="@font/nanumsquareneoalt"
+                        android:layout_gravity="center"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"/>
+
+                    <!-- 평점 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="4dp"
+                        android:layout_gravity="center"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/textRating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="강의 평점 4.9"
+                            android:fontFamily="@font/nanumsquareneoalt"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/textStars"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="★★★★★"
+                            android:textColor="#BABABA"
+                            android:textSize="16sp"
+                            android:layout_marginStart="4dp" />
+
+                        <TextView
+                            android:id="@+id/textReviewCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="(187)"
+                            android:textSize="14sp"
+                            android:layout_marginStart="4dp" />
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="170dp"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="12dp"
+                        android:text="수강신청"
+                        android:fontFamily="@font/nanumsquareneoalt"
+                        android:textSize="15dp"
+                        android:backgroundTint="#F4F4F4"
+                        android:textColor="#0088FF"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:id="@+id/textinformation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="INFORMATION"
+                        android:fontFamily="@font/nanumsquareneodeb"
+                        android:textSize="15dp"
+                        android:backgroundTint="#F4F4F4"
+                        android:textColor="#0088FF"
+                        android:textStyle="bold"
+                        android:layout_marginTop="16dp" />
+                    <TextView
+                        android:id="@+id/textinfor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="간단한 밑반찬부터 파인 다이닝까지 당신의 식탁을 책임질 레시피 읽어주는 여자, 레읽녀의 요리 대백과"
+                        android:fontFamily="@font/nanumsquareneoalt"
+                        android:layout_gravity="center"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="2dp"/>
+
+                    <!-- CONTENTS -->
+                    <TextView
+                        android:id="@+id/textContents"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="CONTENTS"
+                        android:fontFamily="@font/nanumsquareneodeb"
+                        android:textSize="15dp"
+                        android:backgroundTint="#F4F4F4"
+                        android:textColor="#0088FF"
+                        android:textStyle="bold"
+                        android:layout_marginTop="12dp" />
+
+                    <!-- 강의 리스트 -->
+                    <LinearLayout
+                        android:id="@+id/lectureList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="8dp">
+
+                        <!-- 강의 항목 예시 -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=" 01강 | 이제 나도 주부 9단, 반찬 레시피 10종"
+                            android:textSize="15dp"
+                            android:background="@drawable/border"
+                            android:gravity="center_vertical"
+                            android:drawableStart="@android:drawable/ic_media_play"
+                            android:fontFamily="@font/nanumsquareneoalt"
+                            android:layout_marginBottom="5dp"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=" 02강 | 간편하고 고급스런 한식 메인 디쉬 5종"
+                            android:fontFamily="@font/nanumsquareneoalt"
+                            android:textSize="15dp"
+                            android:background="@drawable/border"
+                            android:gravity="center_vertical"
+                            android:drawableStart="@android:drawable/ic_media_play"
+                            android:layout_marginBottom="5dp"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=" 03강 | K-Noodle, 한식 면 요리 5종"
+                            android:fontFamily="@font/nanumsquareneoalt"
+                            android:textSize="15dp"
+                            android:background="@drawable/border"
+                            android:gravity="center_vertical"
+                            android:drawableStart="@android:drawable/ic_media_play"
+                            android:layout_marginBottom="5dp"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=" 04강 | 자투리 재료 처리반, 메인 디쉬 10종"
+                            android:fontFamily="@font/nanumsquareneoalt"
+                            android:textSize="15dp"
+                            android:background="@drawable/border"
+                            android:gravity="center_vertical"
+                            android:drawableStart="@android:drawable/ic_media_play"
+                            android:layout_marginBottom="5dp"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=" 05강 | 한식인듯 중식인듯, 간편 중식 5종"
+                            android:fontFamily="@font/nanumsquareneoalt"
+                            android:textSize="15dp"
+                            android:background="@drawable/border"
+                            android:gravity="center_vertical"
+                            android:drawableStart="@android:drawable/ic_media_play"
+                            android:layout_marginBottom="5dp"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=" 06강 | 에어프라이어 활용법, 고기 요리 5종"
+                            android:fontFamily="@font/nanumsquareneoalt"
+                            android:textSize="15dp"
+                            android:background="@drawable/border"
+                            android:gravity="center_vertical"
+                            android:drawableStart="@android:drawable/ic_media_play"
+                            android:layout_marginBottom="5dp"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=" 07강 | 집에서 만드는 파인 다이닝, 10종"
+                            android:fontFamily="@font/nanumsquareneoalt"
+                            android:textSize="15dp"
+                            android:background="@drawable/border"
+                            android:gravity="center_vertical"
+                            android:drawableStart="@android:drawable/ic_media_play"
+                            android:layout_marginBottom="5dp"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=" 08강 | 만원으로 즐기는 레스토랑, 파스타 5종"
+                            android:fontFamily="@font/nanumsquareneoalt"
+                            android:textSize="15dp"
+                            android:background="@drawable/border"
+                            android:gravity="center_vertical"
+                            android:drawableStart="@android:drawable/ic_media_play"
+                            android:layout_marginBottom="5dp"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=" 09강 | 노오븐 로스팅 스테이크, 고기 요리 3종"
+                            android:fontFamily="@font/nanumsquareneoalt"
+                            android:textSize="15dp"
+                            android:background="@drawable/border"
+                            android:gravity="center_vertical"
+                            android:drawableStart="@android:drawable/ic_media_play"
+                            android:layout_marginBottom="5dp"
+                            android:padding="8dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=" 10강 | 퓨전 한식의 정석, 파인 다이닝 10종"
+                            android:fontFamily="@font/nanumsquareneoalt"
+                            android:textSize="15dp"
+                            android:background="@drawable/border"
+                            android:gravity="center_vertical"
+                            android:drawableStart="@android:drawable/ic_media_play"
+                            android:layout_marginBottom="5dp"
+                            android:padding="8dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

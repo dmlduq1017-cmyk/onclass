@@ -1,0 +1,24 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Project" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">#0088FF</item>
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.Project" parent="Base.Theme.Project" />
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:statusBarColor">@android:color/white</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="Theme.Pie" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/blue</item>
+    </style>
+    <!-- 하단 xml 추가 -->
+    <style name="Theme.OneThree.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/blue</item>
+    </style>
+    <!-- 여기까지 -->
+</resources>

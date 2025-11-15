@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar1"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:background="#0088FF"
+        app:titleTextColor="@color/white">
+        <ImageButton
+            android:id="@+id/backbtn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/ic_action_name"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="로그인"
+            android:fontFamily="@font/nanumsquareneoalt"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="20sp"   />
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        android:background="@color/white"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="오늘도 함께해주셔서 감사합니다!"
+                android:fontFamily="@font/nanumsquareneoalt"
+                android:textStyle="bold"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="로그인"
+                android:textSize="17dp"
+                android:fontFamily="@font/nanumsquareneodeb"
+                android:textStyle="bold"
+                android:layout_marginTop="25dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ID"
+                android:textSize="15dp"
+                android:fontFamily="@font/nanumsquareneodeb"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
+                android:id="@+id/editTextEmail_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint=" 아이디를 입력해주세요"
+                android:fontFamily="@font/nanumsquareneoalt"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:fontFamily="@font/nanumsquareneodeb"
+                android:textSize="15dp"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/editTextPassword_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint=" 비밀번호를 입력해주세요"
+                android:fontFamily="@font/nanumsquareneoalt"
+                android:background="@drawable/border"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/buttonLogin"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="18dp"
+                android:backgroundTint="#F4F4F4"
+                android:textColor="#0088FF"
+                android:text="LOGIN"
+                android:fontFamily="@font/nanumsquareneoalt"
+                android:textStyle="bold"
+                android:textSize="23dp"
+                android:typeface="sans"
+                app:cornerRadius="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ID/비밀번호를 잊으셨나요?"
+                android:fontFamily="@font/nanumsquareneodeb"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="180dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
