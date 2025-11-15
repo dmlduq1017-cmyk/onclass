@@ -2,20 +2,17 @@ package com.example.project;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import android.util.TypedValue;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
@@ -63,16 +60,31 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         // 인기 게시글 표시
-        PostDatabaseHelper dbHelper = new PostDatabaseHelper(this);
-        List<Post> topPosts = dbHelper.getTopViewedPosts(3);
         hotPostRecycler = findViewById(R.id.recycler_view_hot_posts);
         hotPostRecycler.setLayoutManager(new LinearLayoutManager(this));
-        PostAdapter adapter = new PostAdapter(topPosts, post -> {
+        PostDatabaseHelper dbHelper = new PostDatabaseHelper(this);
+        PostAdapter adapter = new PostAdapter(new ArrayList<>(), post -> {
+            String documentId = post.getDocumentId();
+            if (documentId == null) {
+                return;
+            }
             Intent intent = new Intent(HomeActivity.this, PostDetailActivity.class);
-            intent.putExtra("postId", post.getId());
+            intent.putExtra("postId", documentId);
             startActivity(intent);
         });
         hotPostRecycler.setAdapter(adapter);
+
+        dbHelper.getTopViewedPosts(3, new FirestoreCallback<List<Post>>() {
+            @Override
+            public void onSuccess(List<Post> result) {
+                runOnUiThread(() -> adapter.updatePosts(result));
+            }
+
+            @Override
+            public void onError(Exception e) {
+                runOnUiThread(() -> Toast.makeText(HomeActivity.this, "인기 게시글을 불러오지 못했습니다.", Toast.LENGTH_SHORT).show());
+            }
+        });
 
         //하단 네비게이션 버튼 동작
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);

@@ -1,7 +1,6 @@
 package com.example.project;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -13,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class PostDetailActivity extends AppCompatActivity {
@@ -27,16 +26,14 @@ public class PostDetailActivity extends AppCompatActivity {
     private PostDatabaseHelper dbHelper;
     private CommentDatabaseHelper commentDbHelper;
     private CommentAdapter commentAdapter;
-    private List<Comment> commentList;
 
-    private int postId;
+    private String postDocumentId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_detail);
 
-        // 뷰 초기화
         titleTextView = findViewById(R.id.detail_title);
         contentTextView = findViewById(R.id.detail_content);
         dateTextView = findViewById(R.id.detail_date);
@@ -49,52 +46,108 @@ public class PostDetailActivity extends AppCompatActivity {
         commentDbHelper = new CommentDatabaseHelper(this);
 
         commentRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        commentAdapter = new CommentAdapter(new ArrayList<>());
+        commentRecyclerView.setAdapter(commentAdapter);
 
-        // 게시글 ID 가져오기
-        postId = getIntent().getIntExtra("postId", -1);
-        if (postId != -1) {
-            dbHelper.increaseViews(postId);
-            Post post = dbHelper.getPostById(postId);
-            if (post != null) {
-                titleTextView.setText(post.getTitle());
-                contentTextView.setText(post.getContent());
-                dateTextView.setText(post.getDate());
-                viewsTextView.setText("조회수: " + (post.getViews() + 1));
-            }
+        postDocumentId = getIntent().getStringExtra("postId");
+        if (postDocumentId == null) {
+            Toast.makeText(this, "게시글 정보를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
         }
 
-        // 댓글 등록 버튼
+        dbHelper.increaseViews(postDocumentId, new FirestoreCallback<Void>() {
+            @Override
+            public void onSuccess(Void result) {
+                loadPost(true);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                runOnUiThread(() -> Toast.makeText(PostDetailActivity.this, "조회수 업데이트에 실패했습니다.", Toast.LENGTH_SHORT).show());
+                loadPost(false);
+            }
+        });
+
         commentButton.setOnClickListener(v -> {
             String commentText = commentEditText.getText().toString().trim();
-            if (!commentText.isEmpty()) {
-                String now = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-                Comment comment = new Comment(postId, commentText, now);
-                boolean success = commentDbHelper.insertComment(comment);
-                if (success) {
-                    commentEditText.setText("");
-                    Toast.makeText(this, "댓글이 등록되었습니다.", Toast.LENGTH_SHORT).show();
-                    loadComments();
-                }
-            } else {
+            if (commentText.isEmpty()) {
                 Toast.makeText(this, "댓글을 입력하세요.", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            String now = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(new Date());
+            Comment comment = new Comment(postDocumentId, commentText, now);
+            commentButton.setEnabled(false);
+
+            commentDbHelper.insertComment(postDocumentId, comment, new FirestoreCallback<Boolean>() {
+                @Override
+                public void onSuccess(Boolean result) {
+                    runOnUiThread(() -> {
+                        commentEditText.setText("");
+                        commentButton.setEnabled(true);
+                        Toast.makeText(PostDetailActivity.this, "댓글이 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                        loadComments();
+                    });
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    runOnUiThread(() -> {
+                        commentButton.setEnabled(true);
+                        Toast.makeText(PostDetailActivity.this, "댓글 등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                    });
+                }
+            });
         });
 
         loadComments();
 
-        // 뒤로가기 버튼 이벤트 추가
         ImageButton backbtn = findViewById(R.id.backbtn);
-        backbtn.setOnClickListener(new View.OnClickListener() {
+        backbtn.setOnClickListener(v -> finish());
+    }
+
+    private void loadPost(boolean incremented) {
+        dbHelper.getPostById(postDocumentId, new FirestoreCallback<Post>() {
             @Override
-            public void onClick(View v) {
-                finish(); // 현재 액티비티 종료
+            public void onSuccess(Post post) {
+                runOnUiThread(() -> {
+                    if (post == null) {
+                        Toast.makeText(PostDetailActivity.this, "게시글을 불러올 수 없습니다.", Toast.LENGTH_SHORT).show();
+                        finish();
+                        return;
+                    }
+
+                    titleTextView.setText(post.getTitle());
+                    contentTextView.setText(post.getContent());
+                    dateTextView.setText(post.getDate());
+
+                    int views = post.getViews();
+                    if (incremented) {
+                        views += 1;
+                    }
+                    viewsTextView.setText("조회수: " + views);
+                });
+            }
+
+            @Override
+            public void onError(Exception e) {
+                runOnUiThread(() -> Toast.makeText(PostDetailActivity.this, "게시글을 불러오지 못했습니다.", Toast.LENGTH_SHORT).show());
             }
         });
     }
 
     private void loadComments() {
-        commentList = commentDbHelper.getCommentsByPostId(postId);
-        commentAdapter = new CommentAdapter(commentList);
-        commentRecyclerView.setAdapter(commentAdapter);
+        commentDbHelper.getCommentsByPostId(postDocumentId, new FirestoreCallback<java.util.List<Comment>>() {
+            @Override
+            public void onSuccess(java.util.List<Comment> result) {
+                runOnUiThread(() -> commentAdapter.updateComments(result));
+            }
+
+            @Override
+            public void onError(Exception e) {
+                runOnUiThread(() -> Toast.makeText(PostDetailActivity.this, "댓글을 불러오지 못했습니다.", Toast.LENGTH_SHORT).show());
+            }
+        });
     }
 }

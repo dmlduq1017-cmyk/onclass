@@ -94,17 +94,31 @@ public class QuizActivity extends AppCompatActivity {
             return;
         }
 
-        List<String> userCourses = dbHelper.getRegisteredCourses(this.currentUserId);
-        Log.d("QuizActivity_Debug", "User courses from DB: " + userCourses);
+        dbHelper.getRegisteredCourses(this.currentUserId, new FirestoreCallback<List<String>>() {
+            @Override
+            public void onSuccess(List<String> userCourses) {
+                runOnUiThread(() -> {
+                    Log.d("QuizActivity_Debug", "User courses from DB: " + userCourses);
 
-        if (userCourses != null && !userCourses.isEmpty()) {
-            String courseName = userCourses.get(0);  // 첫 번째 강의만 표시
-            Log.d("QuizActivity_Debug", "Course found: " + courseName + ". Showing course info.");
-            showCourseInfo(courseName);
-        } else {
-            Log.d("QuizActivity_Debug", "No courses found in DB for this user. Showing no courses message.");
-            showNoCourses();
-        }
+                    if (userCourses != null && !userCourses.isEmpty()) {
+                        String courseName = userCourses.get(0);
+                        Log.d("QuizActivity_Debug", "Course found: " + courseName + ". Showing course info.");
+                        showCourseInfo(courseName);
+                    } else {
+                        Log.d("QuizActivity_Debug", "No courses found in DB for this user. Showing no courses message.");
+                        showNoCourses();
+                    }
+                });
+            }
+
+            @Override
+            public void onError(Exception e) {
+                runOnUiThread(() -> {
+                    Log.d("QuizActivity_Debug", "Failed to load courses: " + e.getMessage());
+                    showNoCourses();
+                });
+            }
+        });
     }
 
     private void showCourseInfo(String courseName) {

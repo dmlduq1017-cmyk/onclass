@@ -1,26 +1,25 @@
 package com.example.project;
 
 public class Comment {
-    private int id;
-    private int postId;
+    private String documentId;
+    private String postDocumentId;
     private String content;
     private String date;
 
-    public Comment(int id, int postId, String content, String date) {
-        this.id = id;
-        this.postId = postId;
+    public Comment(String documentId, String postDocumentId, String content, String date) {
+        this.documentId = documentId;
+        this.postDocumentId = postDocumentId;
         this.content = content;
         this.date = date;
     }
 
-    public Comment(int postId, String content, String date) {
-        this.postId = postId;
-        this.content = content;
-        this.date = date;
+    public Comment(String postDocumentId, String content, String date) {
+        this(null, postDocumentId, content, date);
     }
 
-    public int getId() { return id; }
-    public int getPostId() { return postId; }
+    public String getDocumentId() { return documentId; }
+    public void setDocumentId(String documentId) { this.documentId = documentId; }
+    public String getPostDocumentId() { return postDocumentId; }
     public String getContent() { return content; }
     public String getDate() { return date; }
 }

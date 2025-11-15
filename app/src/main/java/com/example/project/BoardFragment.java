@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BoardFragment extends Fragment {
@@ -52,24 +54,60 @@ public class BoardFragment extends Fragment {
 
         dbHelper = new PostDatabaseHelper(getContext());
 
-        List<Post> postList;
-        if ("HOT".equalsIgnoreCase(category)) {
+        adapter = new PostAdapter(new ArrayList<>(), post -> {
+            String documentId = post.getDocumentId();
+            if (documentId == null) {
+                return;
+            }
+            dbHelper.increaseViews(documentId, new FirestoreCallback<Void>() {
+                @Override
+                public void onSuccess(Void result) {
+                    // no-op
+                }
 
-            postList = dbHelper.getAllPostsByViews();
-        } else {
-
-            postList = dbHelper.getPostsByCategory(category);
-        }
-
-        adapter = new PostAdapter(postList, post -> {
-            dbHelper.increaseViews(post.getId());
+                @Override
+                public void onError(Exception e) {
+                    if (getContext() != null) {
+                        Toast.makeText(getContext(), "조회수 업데이트 실패", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
             Intent intent = new Intent(getContext(), PostDetailActivity.class);
-            intent.putExtra("postId", post.getId());
+            intent.putExtra("postId", documentId);
             startActivity(intent);
         });
 
         recyclerView.setAdapter(adapter);
+        loadPosts();
 
         return view;
+    }
+
+    private void loadPosts() {
+        if (getContext() == null) {
+            return;
+        }
+
+        FirestoreCallback<List<Post>> callback = new FirestoreCallback<List<Post>>() {
+            @Override
+            public void onSuccess(List<Post> result) {
+                if (isAdded()) {
+                    adapter.updatePosts(result);
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+                if (getContext() != null) {
+                    Toast.makeText(getContext(), "게시글을 불러오지 못했습니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+
+        if ("HOT".equalsIgnoreCase(category)) {
+            dbHelper.getAllPostsByViews(callback);
+        } else {
+            dbHelper.getPostsByCategory(category, callback);
+        }
     }
 }

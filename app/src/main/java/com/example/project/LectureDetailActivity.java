@@ -77,18 +77,26 @@ public class LectureDetailActivity extends AppCompatActivity {
         // 별점 등록
         buttonRate.setOnClickListener(v -> {
             float rating = ratingBar.getRating();
-            ratingDb.saveRating(currentLecture, rating);
+            buttonRate.setEnabled(false);
 
-            float avgRating = ratingDb.getAverageRating(currentLecture);
-            int count = ratingDb.getRatingCount(currentLecture);
+            ratingDb.saveRating(currentLecture, rating, new FirestoreCallback<Void>() {
+                @Override
+                public void onSuccess(Void result) {
+                    runOnUiThread(() -> {
+                        Toast.makeText(LectureDetailActivity.this, "별점 " + rating + "점이 등록되었습니다!", Toast.LENGTH_SHORT).show();
+                        updateRatingInfo();
+                        buttonRate.setEnabled(true);
+                    });
+                }
 
-            Toast.makeText(this, "별점 " + rating + "점이 등록되었습니다!", Toast.LENGTH_SHORT).show();
-
-            // 텍스트뷰 업데이트
-            TextView textRating = findViewById(R.id.textRating);
-            TextView textReviewCount = findViewById(R.id.textReviewCount);
-            textRating.setText("강의 평점 " + String.format("%.1f", avgRating));
-            textReviewCount.setText("(" + count + ")");
+                @Override
+                public void onError(Exception e) {
+                    runOnUiThread(() -> {
+                        buttonRate.setEnabled(true);
+                        Toast.makeText(LectureDetailActivity.this, "별점 등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                    });
+                }
+            });
         });
 
 
@@ -108,8 +116,36 @@ public class LectureDetailActivity extends AppCompatActivity {
         // 뒤로가기 버튼
         ImageButton backbtn = findViewById(R.id.backbtn);
         backbtn.setOnClickListener(v -> finish());
+
+        updateRatingInfo();
     }
 
+
+    private void updateRatingInfo() {
+        ratingDb.getAverageRating(currentLecture, new FirestoreCallback<Float>() {
+            @Override
+            public void onSuccess(Float avgRating) {
+                runOnUiThread(() -> textRating.setText("강의 평점 " + String.format("%.1f", avgRating)));
+            }
+
+            @Override
+            public void onError(Exception e) {
+                runOnUiThread(() -> textRating.setText("강의 평점을 불러오지 못했습니다."));
+            }
+        });
+
+        ratingDb.getRatingCount(currentLecture, new FirestoreCallback<Integer>() {
+            @Override
+            public void onSuccess(Integer count) {
+                runOnUiThread(() -> textReviewCount.setText("(" + count + ")"));
+            }
+
+            @Override
+            public void onError(Exception e) {
+                runOnUiThread(() -> textReviewCount.setText("(0)"));
+            }
+        });
+    }
 
     private int getVideoResId(int lectureNumber) {
         return R.raw.vedio1;

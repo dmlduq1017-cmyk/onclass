@@ -28,26 +28,37 @@ public class LoginActivity extends AppCompatActivity {
             String id = idEditText.getText().toString();
             String password = passwordEditText.getText().toString();
 
-            if (dbHelper.checkUser(id, password)) {
-                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, HomeActivity.class));
-                finish();
-            } else {
-                Toast.makeText(this, "로그인 실패. 정보 확인해주세요.", Toast.LENGTH_SHORT).show();
-            }
+            loginButton.setEnabled(false);
 
-            if (dbHelper.checkUser(id, password)) {
-                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show();
+            dbHelper.checkUser(id, password, new FirestoreCallback<Boolean>() {
+                @Override
+                public void onSuccess(Boolean result) {
+                    runOnUiThread(() -> {
+                        loginButton.setEnabled(true);
+                        if (Boolean.TRUE.equals(result)) {
+                            Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
 
-                // user_id 저장
-                SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("user_id", id);
-                editor.apply();
+                            SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString("user_id", id);
+                            editor.apply();
 
-                startActivity(new Intent(this, HomeActivity.class));
-                finish();
-            }
+                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                            finish();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "로그인 실패. 정보 확인해주세요.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    runOnUiThread(() -> {
+                        loginButton.setEnabled(true);
+                        Toast.makeText(LoginActivity.this, "로그인 실패. 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
+                    });
+                }
+            });
         });
 
         // 뒤로가기 버튼 이벤트 추가

@@ -39,7 +39,7 @@ public class PostDatabaseHelper {
         db.collection(COLLECTION_POSTS)
                 .add(data)
                 .addOnSuccessListener(docRef -> {
-                    // 필요하면 post.setId(docRef.getId()) 해도 됨
+                    // 필요하면 post.setDocumentId(docRef.getId()) 로 로컬 객체를 갱신할 수 있음
                     callback.onSuccess(true);
                 })
                 .addOnFailureListener(callback::onError);
@@ -74,7 +74,7 @@ public class PostDatabaseHelper {
                         // id는 Firestore의 자동 ID를 int로 만들 수 없으니
                         // Post 클래스에 String id 필드를 하나 추가하는 걸 추천
                         Post p = new Post(
-                                0, // 또는 Post 생성자를 수정해서 String id 도 받게 하기
+                                id,
                                 title,
                                 content,
                                 cat,
@@ -82,8 +82,6 @@ public class PostDatabaseHelper {
                                 views.intValue(),
                                 likes.intValue()
                         );
-                        // 만약 Post에 setFirestoreId(String) 같은 메서드를 추가했다면:
-                        // p.setFirestoreId(id);
 
                         list.add(p);
                     }
@@ -131,7 +129,7 @@ public class PostDatabaseHelper {
                     if (likes == null) likes = 0L;
 
                     Post p = new Post(
-                            0,
+                            doc.getId(),
                             title,
                             content,
                             category,
@@ -139,7 +137,6 @@ public class PostDatabaseHelper {
                             views.intValue(),
                             likes.intValue()
                     );
-                    // p.setFirestoreId(doc.getId());
 
                     callback.onSuccess(p);
                 })
@@ -170,7 +167,7 @@ public class PostDatabaseHelper {
                         if (likes == null) likes = 0L;
 
                         Post p = new Post(
-                                0,
+                                doc.getId(),
                                 title,
                                 content,
                                 category,
@@ -207,7 +204,7 @@ public class PostDatabaseHelper {
                         if (likes == null) likes = 0L;
 
                         Post p = new Post(
-                                0,
+                                doc.getId(),
                                 title,
                                 content,
                                 category,

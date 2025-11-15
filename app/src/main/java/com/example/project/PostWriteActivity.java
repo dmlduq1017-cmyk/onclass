@@ -81,15 +81,26 @@ public class PostWriteActivity extends Activity {
                 return;
             }
 
-            Post post = new Post(0, title, content, category, date, 0, 0);
-            boolean success = dbHelper.insertPost(post);
+            Post post = new Post(title, content, category, date);
+            saveButton.setEnabled(false);
 
-            if (success) {
-                Toast.makeText(PostWriteActivity.this, "게시글이 저장되었습니다", Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                Toast.makeText(PostWriteActivity.this, "저장 실패. 다시 시도해주세요", Toast.LENGTH_SHORT).show();
-            }
+            dbHelper.insertPost(post, new FirestoreCallback<Boolean>() {
+                @Override
+                public void onSuccess(Boolean result) {
+                    runOnUiThread(() -> {
+                        Toast.makeText(PostWriteActivity.this, "게시글이 저장되었습니다", Toast.LENGTH_SHORT).show();
+                        finish();
+                    });
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    runOnUiThread(() -> {
+                        saveButton.setEnabled(true);
+                        Toast.makeText(PostWriteActivity.this, "저장 실패. 다시 시도해주세요", Toast.LENGTH_SHORT).show();
+                    });
+                }
+            });
         });
     }
 }

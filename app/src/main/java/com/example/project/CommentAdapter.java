@@ -35,7 +35,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return commentList.size();
+        return commentList == null ? 0 : commentList.size();
+    }
+
+    public void updateComments(List<Comment> comments) {
+        this.commentList = comments;
+        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

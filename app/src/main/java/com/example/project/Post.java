@@ -1,7 +1,7 @@
 package com.example.project;
 
 public class Post {
-    private int id;
+    private String documentId;
     private String title;
     private String content;
     private String category; // hot, free, study, tip
@@ -9,8 +9,8 @@ public class Post {
     private int views;
     private int likes;
 
-    public Post(int id, String title, String content, String category, String date, int views, int likes) {
-        this.id = id;
+    public Post(String documentId, String title, String content, String category, String date, int views, int likes) {
+        this.documentId = documentId;
         this.title = title;
         this.content = content;
         this.category = category;
@@ -20,15 +20,11 @@ public class Post {
     }
 
     public Post(String title, String content, String category, String date) {
-        this.title = title;
-        this.content = content;
-        this.category = category;
-        this.date = date;
-        this.views = 0;
-        this.likes = 0;
+        this(null, title, content, category, date, 0, 0);
     }
 
-    public int getId() { return id; }
+    public String getDocumentId() { return documentId; }
+    public void setDocumentId(String documentId) { this.documentId = documentId; }
     public String getTitle() { return title; }
     public String getContent() { return content; }
     public String getCategory() { return category; }

@@ -33,12 +33,7 @@ public class MyPageActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
         userId = prefs.getString("user_id", "");
 
-        List<String> courses = db.getRegisteredCourses(userId);
-
-        for (String course : courses) {
-            View courseCard = createCourseCard(course);
-            courseListLayout.addView(courseCard);
-        }
+        loadCourses();
         //하단 네비게이션 버튼 동작
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -68,6 +63,30 @@ public class MyPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish(); // 현재 액티비티 종료
+            }
+        });
+    }
+
+    private void loadCourses() {
+        if (userId == null || userId.isEmpty()) {
+            return;
+        }
+
+        db.getRegisteredCourses(userId, new FirestoreCallback<List<String>>() {
+            @Override
+            public void onSuccess(List<String> result) {
+                runOnUiThread(() -> {
+                    courseListLayout.removeAllViews();
+                    for (String course : result) {
+                        View courseCard = createCourseCard(course);
+                        courseListLayout.addView(courseCard);
+                    }
+                });
+            }
+
+            @Override
+            public void onError(Exception e) {
+                // 강의 목록을 불러오지 못한 경우 UI를 유지
             }
         });
     }

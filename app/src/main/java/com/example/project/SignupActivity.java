@@ -47,18 +47,46 @@ public class SignupActivity extends AppCompatActivity {
                 return;
             }
 
-            if (dbHelper.isUserIdExists(id)) {
-                Toast.makeText(this, "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT).show();
-                return;
-            }
+            signupButton.setEnabled(false);
 
-            boolean success = dbHelper.insertUser(id, name, password, birth, gender);
-            if (success) {
-                Toast.makeText(this, "회원가입 성공!", Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                Toast.makeText(this, "회원가입 실패. 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
-            }
+            dbHelper.isUserIdExists(id, new FirestoreCallback<Boolean>() {
+                @Override
+                public void onSuccess(Boolean exists) {
+                    if (exists) {
+                        runOnUiThread(() -> {
+                            signupButton.setEnabled(true);
+                            Toast.makeText(SignupActivity.this, "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT).show();
+                        });
+                        return;
+                    }
+
+                    dbHelper.insertUser(id, name, password, birth, gender, new FirestoreCallback<Boolean>() {
+                        @Override
+                        public void onSuccess(Boolean result) {
+                            runOnUiThread(() -> {
+                                Toast.makeText(SignupActivity.this, "회원가입 성공!", Toast.LENGTH_SHORT).show();
+                                finish();
+                            });
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                            runOnUiThread(() -> {
+                                signupButton.setEnabled(true);
+                                Toast.makeText(SignupActivity.this, "회원가입 실패. 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
+                            });
+                        }
+                    });
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    runOnUiThread(() -> {
+                        signupButton.setEnabled(true);
+                        Toast.makeText(SignupActivity.this, "회원가입 실패. 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
+                    });
+                }
+            });
         });
 
         // 뒤로가기 버튼 이벤트 추가
