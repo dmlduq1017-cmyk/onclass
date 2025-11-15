@@ -59,13 +59,13 @@ public class PostDetailActivity extends AppCompatActivity {
         dbHelper.increaseViews(postDocumentId, new FirestoreCallback<Void>() {
             @Override
             public void onSuccess(Void result) {
-                loadPost(true);
+                loadPost();
             }
 
             @Override
             public void onError(Exception e) {
                 runOnUiThread(() -> Toast.makeText(PostDetailActivity.this, "조회수 업데이트에 실패했습니다.", Toast.LENGTH_SHORT).show());
-                loadPost(false);
+                loadPost();
             }
         });
 
@@ -107,7 +107,7 @@ public class PostDetailActivity extends AppCompatActivity {
         backbtn.setOnClickListener(v -> finish());
     }
 
-    private void loadPost(boolean incremented) {
+    private void loadPost() {
         dbHelper.getPostById(postDocumentId, new FirestoreCallback<Post>() {
             @Override
             public void onSuccess(Post post) {
@@ -122,11 +122,7 @@ public class PostDetailActivity extends AppCompatActivity {
                     contentTextView.setText(post.getContent());
                     dateTextView.setText(post.getDate());
 
-                    int views = post.getViews();
-                    if (incremented) {
-                        views += 1;
-                    }
-                    viewsTextView.setText("조회수: " + views);
+                    viewsTextView.setText("조회수: " + post.getViews());
                 });
             }
 

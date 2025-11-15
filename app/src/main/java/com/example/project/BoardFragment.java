@@ -59,19 +59,7 @@ public class BoardFragment extends Fragment {
             if (documentId == null) {
                 return;
             }
-            dbHelper.increaseViews(documentId, new FirestoreCallback<Void>() {
-                @Override
-                public void onSuccess(Void result) {
-                    // no-op
-                }
 
-                @Override
-                public void onError(Exception e) {
-                    if (getContext() != null) {
-                        Toast.makeText(getContext(), "조회수 업데이트 실패", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
             Intent intent = new Intent(getContext(), PostDetailActivity.class);
             intent.putExtra("postId", documentId);
             startActivity(intent);
